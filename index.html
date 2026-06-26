@@ -4,8 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MISSIONS™ — Don't Scroll. Live.</title>
-
-<meta name="description" content="MISSIONS™ é uma plataforma de missões reais com IA, segurança, validação, comunidade e recompensas.">
+<meta name="description" content="MISSIONS™ — Plataforma de missões reais com IA, segurança, validação e recompensas." />
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -15,14 +14,13 @@
   --line:rgba(255,255,255,.14);
   --green:#9cff1a;
   --blue:#2f8cff;
-  --purple:#9b5cff;
-  --text:#ffffff;
+  --text:#fff;
   --muted:#c8d2c2;
 }
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:Inter,Arial,Helvetica,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
 }
 .app{
@@ -30,34 +28,15 @@ body{
   margin:auto;
   padding:22px;
 }
-.hero{
-  min-height:94vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  position:relative;
-}
-.bg-orb{
-  position:absolute;
-  width:420px;
-  height:420px;
-  border-radius:50%;
-  background:radial-gradient(circle,var(--green),transparent 70%);
-  filter:blur(90px);
-  opacity:.25;
-  top:4%;
-  right:0;
-  z-index:-1;
-}
 .nav{
   position:fixed;
   top:16px;
   left:50%;
   transform:translateX(-50%);
-  max-width:1080px;
   width:calc(100% - 32px);
+  max-width:1080px;
   z-index:10;
-  background:rgba(2,6,4,.78);
+  background:rgba(2,6,4,.82);
   border:1px solid var(--line);
   backdrop-filter:blur(18px);
   border-radius:22px;
@@ -72,11 +51,30 @@ body{
 }
 .logo span{color:var(--green)}
 .nav a{
-  color:white;
+  color:var(--muted);
   text-decoration:none;
   font-size:14px;
   margin-left:16px;
-  color:var(--muted);
+}
+.hero{
+  min-height:94vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+  padding-top:80px;
+}
+.orb{
+  position:absolute;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  background:radial-gradient(circle,var(--green),transparent 70%);
+  filter:blur(90px);
+  opacity:.25;
+  top:6%;
+  right:0;
+  z-index:-1;
 }
 .badge{
   display:inline-flex;
@@ -97,12 +95,17 @@ h1{
   max-width:920px;
 }
 h1 span{color:var(--green)}
-.lead{
-  max-width:680px;
-  font-size:22px;
+h2{
+  font-size:clamp(36px,6vw,68px);
+  letter-spacing:-3px;
+  line-height:.95;
+}
+.lead,.section-text{
+  max-width:720px;
+  font-size:20px;
   color:var(--muted);
-  margin-top:24px;
-  line-height:1.45;
+  margin-top:20px;
+  line-height:1.5;
 }
 .actions{
   display:flex;
@@ -110,7 +113,7 @@ h1 span{color:var(--green)}
   flex-wrap:wrap;
   margin-top:32px;
 }
-button,.btn{
+.btn,button{
   border:0;
   border-radius:18px;
   padding:16px 22px;
@@ -121,10 +124,12 @@ button,.btn{
 }
 .primary{background:var(--green);color:#061006}
 .secondary{background:rgba(255,255,255,.1);color:white;border:1px solid var(--line)}
+.section{padding:80px 0}
 .grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:18px;
+  margin-top:30px;
 }
 .card{
   background:var(--card);
@@ -133,29 +138,11 @@ button,.btn{
   padding:24px;
   box-shadow:0 20px 80px rgba(0,0,0,.22);
 }
-.card h3{
-  font-size:23px;
-  margin-top:12px;
-}
+.card h3{font-size:23px;margin-top:12px}
 .card p{
   color:var(--muted);
   line-height:1.5;
   margin-top:10px;
-}
-.section{
-  padding:80px 0;
-}
-.section-title{
-  font-size:clamp(36px,6vw,68px);
-  letter-spacing:-3px;
-  line-height:.95;
-}
-.section-text{
-  color:var(--muted);
-  font-size:19px;
-  max-width:720px;
-  margin-top:16px;
-  line-height:1.5;
 }
 .phone{
   max-width:390px;
@@ -171,12 +158,6 @@ button,.btn{
   border-radius:34px;
   padding:18px;
   min-height:640px;
-}
-.live{
-  background:rgba(0,0,0,.35);
-  border-radius:24px;
-  padding:18px;
-  margin-top:18px;
 }
 .money{
   font-size:44px;
@@ -202,6 +183,27 @@ button,.btn{
   padding:16px;
   line-height:1.6;
 }
+.waitlist{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  margin-top:20px;
+}
+input{
+  width:100%;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.08);
+  color:white;
+  border-radius:16px;
+  padding:16px;
+  font-size:16px;
+  outline:none;
+}
+.status{
+  color:var(--muted);
+  margin-top:12px;
+  font-size:14px;
+}
 .footer{
   padding:50px 0;
   color:var(--muted);
@@ -212,7 +214,7 @@ button,.btn{
   .nav a{display:none}
   .grid{grid-template-columns:1fr}
   h1{letter-spacing:-3px}
-  .hero{padding-top:80px}
+  .waitlist{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -225,14 +227,14 @@ button,.btn{
     <a href="#how">Como funciona</a>
     <a href="#modes">Modos</a>
     <a href="#safety">Segurança</a>
-    <a href="#mvp">MVP</a>
+    <a href="#waitlist">Waitlist</a>
   </div>
 </nav>
 
 <main class="app">
 
 <section class="hero">
-  <div class="bg-orb"></div>
+  <div class="orb"></div>
   <div class="badge">AI REAL-WORLD MISSION PLATFORM</div>
   <h1>Don’t Scroll.<br><span>Live.</span></h1>
   <p class="lead">
@@ -241,15 +243,15 @@ button,.btn{
   </p>
   <div class="actions">
     <a class="btn primary" href="#demo">Aceitar a missão</a>
-    <a class="btn secondary" href="#modes">Explorar modos</a>
+    <a class="btn secondary" href="#waitlist">Entrar na waitlist</a>
   </div>
 </section>
 
 <section id="how" class="section">
-  <h2 class="section-title">Como funciona</h2>
+  <h2>Como funciona</h2>
   <p class="section-text">Um fluxo simples: a IA gera uma missão, o jogador aceita, cumpre, valida e recebe XP, reputação ou recompensa.</p>
 
-  <div class="grid" style="margin-top:30px">
+  <div class="grid">
     <div class="card"><div>🤖</div><h3>1. IA cria</h3><p>Missões adaptadas ao perfil, contexto, dificuldade e regras de segurança.</p></div>
     <div class="card"><div>🎯</div><h3>2. Tu aceitas</h3><p>Podes aceitar, recusar ou escolher Life Mode sem dinheiro e sem público.</p></div>
     <div class="card"><div>📍</div><h3>3. Validação</h3><p>GPS, tempo, foto/vídeo, comunidade e moderação reduzem fraude.</p></div>
@@ -259,7 +261,7 @@ button,.btn{
 <section id="demo" class="section">
   <div class="grid" style="align-items:center">
     <div>
-      <h2 class="section-title">A vida como tabuleiro.</h2>
+      <h2>A vida como tabuleiro.</h2>
       <p class="section-text">
         Em vez de abrir um feed infinito, o utilizador abre a app e recebe uma missão clara.
       </p>
@@ -276,10 +278,10 @@ button,.btn{
     <div class="phone">
       <div class="screen">
         <div class="badge">● LIVE</div>
-        <h2 style="font-size:36px;line-height:1;margin-top:10px">CORRE 1 KM</h2>
+        <h2 style="font-size:36px;margin-top:10px">CORRE 1 KM</h2>
         <p style="color:var(--muted);margin-top:10px">Rua segura, parque ou pista.</p>
         <div class="money">42,00 €</div>
-        <div class="live">
+        <div style="background:rgba(0,0,0,.35);border-radius:24px;padding:18px;margin-top:18px">
           <div class="item"><span>João: Força!</span><b style="color:var(--green)">+5 €</b></div>
           <div class="item"><span>Maria: Vai!</span><b style="color:var(--green)">+2 €</b></div>
           <div class="item"><span>Sara: Completa!</span><b style="color:var(--green)">+10 €</b></div>
@@ -292,40 +294,25 @@ button,.btn{
 </section>
 
 <section id="modes" class="section">
-  <h2 class="section-title">Modos</h2>
+  <h2>Modos</h2>
   <p class="section-text">Nem todas as missões precisam de público. Algumas são só tu contra ontem.</p>
 
-  <div class="grid" style="margin-top:30px">
+  <div class="grid">
     <div class="card"><div>🎮</div><h3>Game Mode</h3><p>Lives, apoios, ranking, validação, carteira e missões patrocinadas.</p></div>
     <div class="card"><div>🌿</div><h3>Life Mode</h3><p>Missões privadas, sem dinheiro, sem ranking e sem pressão.</p></div>
     <div class="card"><div>🌍</div><h3>World Mode</h3><p>Objetivos globais em comunidade: saúde, leitura, ambiente e voluntariado.</p></div>
-    <div class="card"><div>🤖</div><h3>AI Mode</h3><p>A IA escolhe a missão ideal para o teu dia, hábitos e objetivos.</p></div>
-    <div class="card"><div>👻</div><h3>Ghost Mode</h3><p>Joga em privado. Ninguém vê. Só tu e a tua evolução.</p></div>
-    <div class="card"><div>🏢</div><h3>Company Mode</h3><p>Empresas, museus, universidades e ONGs criam campanhas de missões.</p></div>
-  </div>
-</section>
-
-<section class="section">
-  <h2 class="section-title">Categorias</h2>
-  <div class="grid" style="margin-top:30px">
-    <div class="card"><h3>🏃 Move</h3><p>Caminhar, correr, alongar, treinar.</p></div>
-    <div class="card"><h3>📚 Learn</h3><p>Ler, estudar, aprender idiomas e competências.</p></div>
-    <div class="card"><h3>❤️ Help</h3><p>Boas ações, voluntariado e impacto social.</p></div>
-    <div class="card"><h3>🎨 Create</h3><p>Fotografia, escrita, música, arte e cozinha.</p></div>
-    <div class="card"><h3>🌍 Explore</h3><p>Museus, trilhos, parques, cidades e cultura.</p></div>
-    <div class="card"><h3>🧘 Life</h3><p>Hábitos, descanso, foco, organização e bem-estar.</p></div>
   </div>
 </section>
 
 <section id="safety" class="section">
   <div class="card" style="background:linear-gradient(135deg,rgba(156,255,26,.16),rgba(255,255,255,.06))">
     <div class="badge">CÓDIGO DE MISSÕES™</div>
-    <h2 class="section-title">Nenhuma missão vale mais do que uma vida.</h2>
+    <h2>Nenhuma missão vale mais do que uma vida.</h2>
     <p class="section-text">
       O motor de regras bloqueia missões perigosas, ilegais, humilhantes, invasivas ou que pressionem o utilizador.
     </p>
 
-    <div class="grid" style="margin-top:28px">
+    <div class="grid">
       <div class="card"><h3>🛡️ Segurança</h3><p>Nada de riscos físicos graves, estradas perigosas, alturas, fogo ou violência.</p></div>
       <div class="card"><h3>🤝 Consentimento</h3><p>Terceiros só participam se aceitarem. Nada de gravação invasiva.</p></div>
       <div class="card"><h3>↩️ Parar sempre</h3><p>O jogador pode terminar a missão se sentir dor, perigo ou desconforto.</p></div>
@@ -333,71 +320,39 @@ button,.btn{
   </div>
 </section>
 
-<section class="section">
-  <h2 class="section-title">Modelo económico</h2>
-  <p class="section-text">
-    Apoios ficam pendentes até validação. A plataforma retém uma comissão e o jogador recebe o saldo líquido.
-  </p>
-
-  <div class="grid" style="margin-top:30px">
-    <div class="card"><h3>💰 Apoios</h3><p>Espectadores podem apoiar missões com valores pequenos ou metas maiores.</p></div>
-    <div class="card"><h3>📊 Comissão</h3><p>Modelo inicial recomendado: 15% para a plataforma e 85% para o jogador.</p></div>
-    <div class="card"><h3>🏢 Parceiros</h3><p>Marcas e instituições podem financiar missões patrocinadas e verificadas.</p></div>
-  </div>
-</section>
-
-<section id="mvp" class="section">
-  <h2 class="section-title">MVP técnico</h2>
-  <p class="section-text">Primeira versão funcional com o fluxo essencial.</p>
-
-  <div class="code" style="margin-top:24px">
-    1. Conta e perfil<br>
-    2. Gerador de missões IA<br>
-    3. Motor de regras de segurança<br>
-    4. Missão ativa<br>
-    5. Live e apoios<br>
-    6. Validação<br>
-    7. Carteira<br>
-    8. Painel admin
-  </div>
-</section>
-
-<section class="section">
-  <h2 class="section-title">Roadmap</h2>
-
-  <div class="grid" style="margin-top:30px">
-    <div class="card"><h3>Fase 1</h3><p>Protótipo web, landing page, fluxo de missão e waitlist.</p></div>
-    <div class="card"><h3>Fase 2</h3><p>MVP com login, missões, validação e carteira simulada.</p></div>
-    <div class="card"><h3>Fase 3</h3><p>Beta em Portugal com 50 a 100 utilizadores.</p></div>
-    <div class="card"><h3>Fase 4</h3><p>Parceiros locais, missões patrocinadas e eventos.</p></div>
-    <div class="card"><h3>Fase 5</h3><p>App mobile, wearables, mapas e expansão europeia.</p></div>
-    <div class="card"><h3>Fase 6</h3><p>Marketplace global de missões e MISSIONS API.</p></div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="card" style="text-align:center;padding:50px 24px">
-    <div class="badge">START THE MISSION</div>
-    <h2 class="section-title">Open the app.<br>Close the feed.<br><span style="color:var(--green)">Live the mission.</span></h2>
-    <p class="section-text" style="margin-left:auto;margin-right:auto">
-      MISSIONS™ não quer prender pessoas ao ecrã. Quer dar-lhes uma razão para sair, criar, aprender, ajudar e viver.
+<section id="waitlist" class="section">
+  <div class="card">
+    <div class="badge">WAITLIST</div>
+    <h2>Entrar na primeira beta.</h2>
+    <p class="section-text">
+      Deixa o teu email para entrar na lista inicial do MISSIONS™.
     </p>
-    <div class="actions" style="justify-content:center">
-      <a class="btn primary" href="#demo">Ver missão demo</a>
-      <a class="btn secondary" href="https://github.com/" target="_blank">GitHub</a>
+
+    <div class="waitlist">
+      <input id="emailInput" type="email" placeholder="teuemail@exemplo.com" />
+      <button class="primary" onclick="joinWaitlist()">Entrar</button>
     </div>
+
+    <div class="status" id="statusMsg">Ligação Supabase pronta para teste.</div>
   </div>
 </section>
 
 <footer class="footer">
   <b>MISSIONS™</b><br>
   Don’t Scroll. Live.<br><br>
-  Protótipo conceptual v1.0 — HTML, CSS e JavaScript.
+  Protótipo conceptual v1.0 — HTML, CSS, JavaScript e Supabase.
 </footer>
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+const SUPABASE_URL = "https://icjimnugwwmptfsqsbqx.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImljamltbnVnd3dtcHRmc3FzYnF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODk4ODUsImV4cCI6MjA5ODA2NTg4NX0.NFGHlSuQ9Qyx4ijHOl4eyiHrZW1KPXZ34VJWoT6pXnc";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 document.querySelectorAll('a[href^="#"]').forEach(link=>{
   link.addEventListener("click",e=>{
     const id=link.getAttribute("href");
@@ -408,6 +363,64 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
     }
   });
 });
+
+async function testarSupabase(){
+  const status = document.getElementById("statusMsg");
+
+  try{
+    const { data, error } = await supabaseClient
+      .from("users")
+      .select("id")
+      .limit(1);
+
+    if(error){
+      status.innerText = "Supabase ligado, mas a tabela users ainda não existe ou está bloqueada.";
+      console.log("Erro Supabase:", error.message);
+      return;
+    }
+
+    status.innerText = "Supabase ligado com sucesso.";
+    console.log("Supabase ligado:", data);
+  }catch(err){
+    status.innerText = "Erro ao ligar ao Supabase.";
+    console.log(err);
+  }
+}
+
+async function joinWaitlist(){
+  const email = document.getElementById("emailInput").value.trim();
+  const status = document.getElementById("statusMsg");
+
+  if(!email || !email.includes("@")){
+    status.innerText = "Insere um email válido.";
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("users")
+    .insert([
+      {
+        email: email,
+        name: "Waitlist User",
+        country: "Portugal",
+        xp: 0,
+        level: 1,
+        reputation: 100,
+        wallet_balance: 0
+      }
+    ]);
+
+  if(error){
+    status.innerText = "Erro ao guardar email: " + error.message;
+    console.log(error);
+    return;
+  }
+
+  status.innerText = "Email guardado com sucesso. Bem-vindo à waitlist MISSIONS™.";
+  document.getElementById("emailInput").value = "";
+}
+
+testarSupabase();
 </script>
 
 </body>
