@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MISSIONS™ App</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#020604;
+  --card:rgba(255,255,255,.08);
+  --line:rgba(255,255,255,.14);
+  --green:#9cff1a;
+  --blue:#2f8cff;
+  --muted:#c8d2c2;
+}
+body{
+  background:var(--bg);
+  color:white;
+  font-family:Arial,Helvetica,sans-serif;
+}
+.app{
+  max-width:430px;
+  min-height:100vh;
+  margin:auto;
+  padding:18px;
+  background:radial-gradient(circle at top,#254b14,#030603 72%);
+}
+.logo{
+  font-size:30px;
+  font-weight:900;
+}
+.logo span{color:var(--green)}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:18px;
+  margin-top:16px;
+}
+.badge{
+  display:inline-block;
+  background:rgba(156,255,26,.14);
+  color:var(--green);
+  border:1px solid rgba(156,255,26,.35);
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+}
+h1{font-size:32px;line-height:1;margin-top:10px}
+p{color:var(--muted);line-height:1.45;margin-top:8px}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+}
+.box{
+  background:rgba(0,0,0,.34);
+  border-radius:16px;
+  padding:12px;
+  text-align:center;
+}
+.box b{font-size:22px;color:var(--green)}
+button{
+  width:100%;
+  border:0;
+  border-radius:18px;
+  padding:15px;
+  margin-top:12px;
+  font-size:16px;
+  font-weight:900;
+}
+.green{background:var(--green);color:#061006}
+.blue{background:var(--blue);color:white}
+.dark{background:#151b18;color:white;border:1px solid var(--line)}
+.red{background:#ff2c2c;color:white}
+.item{
+  background:rgba(0,0,0,.3);
+  border-radius:16px;
+  padding:12px;
+  margin-top:10px;
+}
+.nav{
+  position:sticky;
+  bottom:12px;
+  background:rgba(5,8,6,.94);
+  border:1px solid var(--line);
+  border-radius:22px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  margin-top:18px;
+  overflow:hidden;
+}
+.nav button{
+  margin:0;
+  border-radius:0;
+  background:transparent;
+  color:white;
+  font-size:11px;
+  padding:13px 2px;
+}
+.screen{display:none}
+.screen.active{display:block}
+.status{font-size:13px;color:var(--muted);margin-top:10px}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<section id="home" class="screen active">
+  <div class="logo">MISSIONS<span>™</span></div>
+
+  <div class="card">
+    <span class="badge">APP MVP</span>
+    <h1>Bom dia, Pedro.</h1>
+    <p>Hoje tens uma missão à tua espera.</p>
+
+    <div class="grid">
+      <div class="box"><small>NÍVEL</small><br><b id="level">1</b></div>
+      <div class="box"><small>XP</small><br><b id="xp">0</b></div>
+      <div class="box"><small>CONFIANÇA</small><br><b id="trust">100%</b></div>
+      <div class="box"><small>MISSÕES</small><br><b id="done">0</b></div>
+    </div>
+
+    <button class="green" onclick="generateMission()">GERAR MISSÃO</button>
+    <button class="dark" onclick="show('profile')">VER PERFIL</button>
+  </div>
+
+  <div class="card">
+    <h1 style="font-size:24px">Ligação</h1>
+    <p id="status">A testar Supabase...</p>
+  </div>
+</section>
+
+<section id="mission" class="screen">
+  <div class="card">
+    <span class="badge" id="missionCategory">MOVE</span>
+    <h1 id="missionTitle">Caminha 10 minutos</h1>
+    <p id="missionDesc">Missão privada e segura para começares o dia.</p>
+
+    <div class="grid">
+      <div class="box"><small>DIFICULDADE</small><br><b id="difficulty">Fácil</b></div>
+      <div class="box"><small>XP</small><br><b id="xpReward">50</b></div>
+    </div>
+
+    <button class="green" onclick="acceptMission()">ACEITAR MISSÃO</button>
+    <button class="blue" onclick="completeMission()">CONCLUIR MISSÃO</button>
+    <button class="dark" onclick="generateMission()">NOVA MISSÃO</button>
+  </div>
+</section>
+
+<section id="profile" class="screen">
+  <div class="card">
+    <span class="badge">PERFIL</span>
+    <h1>Jogador MISSIONS™</h1>
+    <p>A tua evolução aparece aqui.</p>
+
+    <div class="grid">
+      <div class="box"><small>NÍVEL</small><br><b id="pLevel">1</b></div>
+      <div class="box"><small>XP</small><br><b id="pXp">0</b></div>
+      <div class="box"><small>REPUTAÇÃO</small><br><b id="pTrust">100%</b></div>
+      <div class="box"><small>CONCLUÍDAS</small><br><b id="pDone">0</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="history" class="screen">
+  <div class="card">
+    <span class="badge">HISTÓRICO</span>
+    <h1>Missões concluídas</h1>
+    <div id="historyList"></div>
+  </div>
+</section>
+
+<div class="nav">
+  <button onclick="show('home')">Início</button>
+  <button onclick="show('mission')">Missão</button>
+  <button onclick="show('profile')">Perfil</button>
+  <button onclick="show('history')">Histórico</button>
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://icjimnugwwmptfsqsbqx.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImljamltbnVnd3dtcHRmc3FzYnF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0ODk4ODUsImV4cCI6MjA5ODA2NTg4NX0.NFGHlSuQ9Qyx4ijHOl4eyiHrZW1KPXZ34VJWoT6pXnc";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let xp = Number(localStorage.getItem("missions_xp")) || 0;
+let level = Number(localStorage.getItem("missions_level")) || 1;
+let trust = Number(localStorage.getItem("missions_trust")) || 100;
+let done = Number(localStorage.getItem("missions_done")) || 0;
+let currentMission = null;
+
+const missions = [
+  {
+    title:"Caminha 10 minutos",
+    desc:"Uma missão simples para mexeres o corpo sem pressão.",
+    category:"MOVE",
+    difficulty:"Fácil",
+    xp:50
+  },
+  {
+    title:"Lê 5 páginas",
+    desc:"Missão de aprendizagem privada. Sem ranking.",
+    category:"LEARN",
+    difficulty:"Fácil",
+    xp:40
+  },
+  {
+    title:"Bebe um copo de água",
+    desc:"Uma pequena missão de cuidado pessoal.",
+    category:"LIFE",
+    difficulty:"Fácil",
+    xp:20
+  },
+  {
+    title:"Arruma uma parte da casa",
+    desc:"Transforma energia parada em progresso real.",
+    category:"LIFE",
+    difficulty:"Média",
+    xp:60
+  },
+  {
+    title:"Faz uma boa ação discreta",
+    desc:"Ajuda alguém sem publicar, sem gravar e sem pressão.",
+    category:"HELP",
+    difficulty:"Média",
+    xp:80
+  },
+  {
+    title:"Tira uma fotografia de algo bonito",
+    desc:"Missão criativa para treinar atenção ao mundo.",
+    category:"CREATE",
+    difficulty:"Fácil",
+    xp:45
+  }
+];
+
+function show(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function updateUI(){
+  level = Math.floor(xp / 300) + 1;
+
+  document.getElementById("xp").innerText = xp;
+  document.getElementById("level").innerText = level;
+  document.getElementById("trust").innerText = trust + "%";
+  document.getElementById("done").innerText = done;
+
+  document.getElementById("pXp").innerText = xp;
+  document.getElementById("pLevel").innerText = level;
+  document.getElementById("pTrust").innerText = trust + "%";
+  document.getElementById("pDone").innerText = done;
+
+  localStorage.setItem("missions_xp", xp);
+  localStorage.setItem("missions_level", level);
+  localStorage.setItem("missions_trust", trust);
+  localStorage.setItem("missions_done", done);
+}
+
+function generateMission(){
+  currentMission = missions[Math.floor(Math.random() * missions.length)];
+
+  document.getElementById("missionTitle").innerText = currentMission.title;
+  document.getElementById("missionDesc").innerText = currentMission.desc;
+  document.getElementById("missionCategory").innerText = currentMission.category;
+  document.getElementById("difficulty").innerText = currentMission.difficulty;
+  document.getElementById("xpReward").innerText = currentMission.xp;
+
+  show("mission");
+}
+
+async function acceptMission(){
+  if(!currentMission) generateMission();
+
+  const { error } = await supabaseClient.from("missions").insert([
+    {
+      title: currentMission.title,
+      description: currentMission.desc,
+      category: currentMission.category,
+      mode: "life",
+      difficulty: currentMission.difficulty,
+      status: "accepted",
+      base_reward: 0,
+      public_reward: 0,
+      total_reward: 0,
+      safety_notes: "Life Mode privado e seguro."
+    }
+  ]);
+
+  if(error){
+    alert("Missão aceite localmente. Supabase: " + error.message);
+    return;
+  }
+
+  alert("Missão aceite e registada no Supabase.");
+}
+
+async function completeMission(){
+  if(!currentMission) generateMission();
+
+  xp += currentMission.xp;
+  done += 1;
+  trust = Math.min(100, trust + 1);
+
+  addHistory("✅ " + currentMission.title + " · +" + currentMission.xp + " XP");
+
+  await supabaseClient.from("missions").insert([
+    {
+      title: currentMission.title,
+      description: currentMission.desc,
+      category: currentMission.category,
+      mode: "life",
+      difficulty: currentMission.difficulty,
+      status: "approved",
+      base_reward: 0,
+      public_reward: 0,
+      total_reward: 0,
+      safety_notes: "Missão concluída no protótipo app."
+    }
+  ]);
+
+  updateUI();
+  alert("Missão concluída. XP adicionado.");
+  generateMission();
+}
+
+function addHistory(text){
+  const div = document.createElement("div");
+  div.className = "item";
+  div.innerHTML = `<span>${text}</span>`;
+  document.getElementById("historyList").prepend(div);
+}
+
+async function testSupabase(){
+  const status = document.getElementById("status");
+
+  try{
+    const { data, error } = await supabaseClient
+      .from("missions")
+      .select("id")
+      .limit(1);
+
+    if(error){
+      status.innerText = "Supabase ligado, mas verifica se a tabela missions existe.";
+      console.log(error);
+      return;
+    }
+
+    status.innerText = "Supabase ligado com sucesso.";
+  }catch(err){
+    status.innerText = "Erro ao ligar ao Supabase.";
+    console.log(err);
+  }
+}
+
+generateMission();
+updateUI();
+testSupabase();
+</script>
+
+</body>
+</html>
