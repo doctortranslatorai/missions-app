@@ -13,13 +13,11 @@
   --card:rgba(255,255,255,.08);
   --line:rgba(255,255,255,.14);
   --green:#9cff1a;
-  --blue:#2f8cff;
-  --text:#fff;
   --muted:#c8d2c2;
 }
 body{
-  background:var(--bg);
-  color:var(--text);
+  background:#020604;
+  color:white;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
 }
@@ -36,7 +34,7 @@ body{
   width:calc(100% - 32px);
   max-width:1080px;
   z-index:10;
-  background:rgba(2,6,4,.82);
+  background:rgba(2,6,4,.84);
   border:1px solid var(--line);
   backdrop-filter:blur(18px);
   border-radius:22px;
@@ -242,7 +240,7 @@ input{
     A IA sugere. Tu decides. O mundo torna-se o mapa.
   </p>
   <div class="actions">
-    <a class="btn primary" href="#demo">Aceitar a missão</a>
+    <a class="btn primary" href="app.html">Aceitar a missão</a>
     <a class="btn secondary" href="#waitlist">Entrar na waitlist</a>
   </div>
 </section>
@@ -286,8 +284,8 @@ input{
           <div class="item"><span>Maria: Vai!</span><b style="color:var(--green)">+2 €</b></div>
           <div class="item"><span>Sara: Completa!</span><b style="color:var(--green)">+10 €</b></div>
         </div>
-        <button class="primary" style="width:100%;margin-top:18px">Submeter validação</button>
-        <button class="secondary" style="width:100%;margin-top:10px">Parar missão</button>
+        <a class="btn primary" href="app.html" style="display:block;text-align:center;margin-top:18px">Abrir App</a>
+        <button class="secondary" style="width:100%;margin-top:10px">Ver regras</button>
       </div>
     </div>
   </div>
@@ -340,7 +338,7 @@ input{
 <footer class="footer">
   <b>MISSIONS™</b><br>
   Don’t Scroll. Live.<br><br>
-  Protótipo conceptual v1.0 — HTML, CSS, JavaScript e Supabase.
+  Protótipo conceptual v1.1 — ligado ao app.html.
 </footer>
 
 </main>
@@ -374,7 +372,7 @@ async function testarSupabase(){
       .limit(1);
 
     if(error){
-      status.innerText = "Supabase ligado, mas a tabela users ainda não existe ou está bloqueada.";
+      status.innerText = "Supabase ligado. Verifica se a tabela users existe.";
       console.log("Erro Supabase:", error.message);
       return;
     }
